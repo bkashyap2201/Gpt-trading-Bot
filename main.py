@@ -1,11 +1,7 @@
-from telegram import Update
-from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 import os
+from telegram.ext import Updater
 
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("Hello! GPT Trading Bot is online.")
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")  # ⬅ This should fetch from Render
 
-if __name__ == '__main__':
-    app = ApplicationBuilder().token(os.getenv("BOT_TOKEN")).build()
-    app.add_handler(CommandHandler("start", start))
-    app.run_polling()
+updater = Updater(token=TELEGRAM_TOKEN, use_context=True)
+dispatcher = updater.dispatcher
